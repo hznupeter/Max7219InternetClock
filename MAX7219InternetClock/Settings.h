@@ -38,9 +38,9 @@ int spacer = 1;  // 字符间距
 int width = 5 + spacer; // 字符宽度
 boolean displayOn = true;
 // MAX7219连线
-// CLK -> D5 (SCK)
+// CLK -> D5 (SCK) GPIO14
 // CS  -> D6 GPIO12
-// DIN -> D7 (MOSI)
+// DIN -> D7 (MOSI)GPIO13
 const int pinCS = 12; //max7219 CS
 const int pinBtn = 4;//按键/触发器管脚
 const int pinBuzzer = 15;//蜂鸣器管脚
@@ -49,4 +49,4 @@ int displayIntensity = 1;  //默认亮度(1 - 15)
 long timeDisplayTurnsOn = 21600; // 每天开机时间，自00:00起计算秒数
 long timeDisplayTurnsOff = 82800; //每天关机时间，自00:00起计算秒数
 DHT dht(pinDHT, DHTTYPE);
-Max72xxPanel matrix = Max72xxPanel(pinCS, numberOfHorizontalDisplays, numberOfVerticalDisplays);
+Max72xxPanel matrix = Max72xxPanel(pinCS, 4, 1);
