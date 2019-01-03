@@ -1,11 +1,11 @@
 #include "Settings.h"
 void Display() { //显示内容
-   Serial.println(1);
+  //Serial.println(1);
   if (millis() < 5000)  {//开机画面
     scrollMessage(marqueeMessage);
   }
-  else if ((minute() == 0 || minute() == 30) && second() == 0) { //显示日期，天气，温湿度
-    Blynk.virtualWrite(V2, "https://" + host + "/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
+  else if ((minute() == 59 || minute() == 30) && second() == 0) { //显示日期，天气，温湿度，每隔半小时
+    Blynk.virtualWrite(V2, "https://api.seniverse.com/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
     String currentDate = String(year());
     currentDate += (month() < 10) ? "-0" + String(month()) : "-" + String(month());
     currentDate += (day() < 10) ? "-0" + String(day()) : "-" + String(day());
@@ -23,7 +23,16 @@ void Display() { //显示内容
     Temperature = dht.readTemperature(); //摄氏度
     while (isnan(Temperature) || Temperature > 100)
       Temperature = dht.readTemperature(); //摄氏度
-    checkDisplay();//每分钟判断一次是否要关闭显示
+    long currentTime = hour() * 60 * 60 + minute() * 60 + second();
+    if (currentTime == timeDisplayTurnsOn && !displayOn) {//如果当前时间等于设定的开机时间，且当前屏幕没有开，则开启显示
+      enableDisplay(true);
+    }
+    if (currentTime == timeDisplayTurnsOff && displayOn) { //如果当前时间等于设定的关机时间，且当前屏幕开了，则关闭显示
+      enableDisplay(false);
+    }
+    if (currentTime == AlarmTime) { //如果当前时间等于设定的闹钟时间
+      AlarmClock();
+    }
   }
   else if (minute() == 0 && second() == 0) { //当分钟为0，秒钟为0时，显示整点问候，整点报时
     scrollMessage(marqueeMessage);
@@ -31,9 +40,9 @@ void Display() { //显示内容
       onTimeAlarm();
   }
   else { //显示时间
-     Serial.println("show time");
+    Serial.println("show time");
     String currentTime = "" ;
-    String colon = (second() % 2 == 0) ? ":" : " ";
+    String colon = (second() % 2 == 0) ? ":" : " ";//时钟分割点
     if (IS_24HOUR) {//24小时制
       currentTime += (hour() < 10) ? "0" + String(hour()) : String(hour()) + colon;
       currentTime += (minute() < 10) ? "0" + String(minute()) :  String(minute());
@@ -45,6 +54,16 @@ void Display() { //显示内容
     }
     centerPrint(currentTime);
   }
+}
+void AlarmClock ()//闹钟铃声
+{
+  tone(pinBuzzer, 415, 500);
+  delay(500 * 1.3);
+  tone(pinBuzzer, 466, 500);
+  delay(500 * 1.3);
+  tone(pinBuzzer, 370, 1000);
+  delay(1000 * 1.3);
+  noTone(pinBuzzer);
 }
 void onTimeAlarm ()//整点报时铃声
 {
@@ -87,15 +106,15 @@ void setup() {
     matrix.setRotation(i, 3);
     matrix.setPosition(i, 3 - i, 0);
   }
-  Blynk.virtualWrite(V2, "https://" + host + "/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
+  Blynk.virtualWrite(V2, "https://api.seniverse.com/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
   setSyncInterval(10 * 60); // 设置同步间隔时间，10分钟
   timer.setInterval(1000L, Display);//每隔1s，运行Display函数
-//  Humidity = dht.readHumidity();
-//  while (isnan(Humidity) || Humidity > 100)
-//    Humidity = dht.readHumidity();
-//  Temperature = dht.readTemperature();
-//  while (isnan(Temperature) || Temperature > 100)
-//    Temperature = dht.readTemperature();
+  //  Humidity = dht.readHumidity();
+  //  while (isnan(Humidity) || Humidity > 100)
+  //    Humidity = dht.readHumidity();
+  //  Temperature = dht.readTemperature();
+  //  while (isnan(Temperature) || Temperature > 100)
+  //    Temperature = dht.readTemperature();
   Serial.println(Temperature);
 }
 void enableDisplay(boolean enable) {//开启显示
@@ -137,10 +156,9 @@ BLYNK_WRITE(V3)//获取欢迎语
   Serial.println(marqueeMessage);
 }
 
-BLYNK_WRITE(V4)//获取城市
+BLYNK_WRITE(V4)//获取及时消息
 {
-  city = param.asStr();
-  Serial.println(city);
+  scrollMessage(param.asStr());//显示及时消息
 }
 
 BLYNK_WRITE(V5)//获取24/12小时制
@@ -179,14 +197,12 @@ BLYNK_WRITE(V8)//获取滚动速度
       break;
   }
 }
+BLYNK_WRITE(V9)//获取闹钟时间
+{
+  AlarmTime = param[0].asLong();
+}
 void checkDisplay() {//检查是否要关闭显示
-  long currentTime = hour() * 60 * 60 + minute() * 60 + second();
-  if (currentTime == timeDisplayTurnsOn && !displayOn) {//如果当前时间等于设定的开机时间，且当前屏幕没有开，则开启显示
-    enableDisplay(true);
-  }
-  if (currentTime == timeDisplayTurnsOff && displayOn) { //如果当前时间等于设定的关机时间，且当前屏幕开了，则关闭显示
-    enableDisplay(false);
-  }
+
 }
 void scrollMessage(String msg) {//滚动显示文本
   msg += "";

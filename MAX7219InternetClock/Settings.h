@@ -12,10 +12,8 @@
 #include <pgmspace.h>
 #define DHTTYPE DHT22
 char auth[] = "4c77138d712c48d7a6f922cf3d7246ed";//授权码
-String host = "api.seniverse.com";
 String APIKEY = "wactucc9uyjz6lq7"; //心知天气API
 String city = "Hangzhou";
-String language = "en";
 String marqueeMessage = "Have A Good Day";
 boolean IS_24HOUR = true; // 24/12小时制
 int displayScrollSpeed = 30; // 字符滚动速度
@@ -46,5 +44,6 @@ const int pinDHT = 5; //DHT11传感器连接管脚
 int displayIntensity = 1;  //默认亮度(1 - 15)
 long timeDisplayTurnsOn = 21600; // 每天开机时间，自00:00起计算秒数
 long timeDisplayTurnsOff = 82800; //每天关机时间，自00:00起计算秒数
+long AlarmTime;
 DHT dht(pinDHT, DHTTYPE);
 Max72xxPanel matrix = Max72xxPanel(pinCS, 4, 1);
