@@ -1,9 +1,37 @@
 #include "Settings.h"
 void Display() { //显示内容
+   Serial.println(1);
   if (millis() < 5000)  {//开机画面
     scrollMessage(marqueeMessage);
   }
-  else if (displyType == 0) {//显示时间
+  else if ((minute() == 0 || minute() == 30) && second() == 0) { //显示日期，天气，温湿度
+    Blynk.virtualWrite(V2, "https://" + host + "/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
+    String currentDate = String(year());
+    currentDate += (month() < 10) ? "-0" + String(month()) : "-" + String(month());
+    currentDate += (day() < 10) ? "-0" + String(day()) : "-" + String(day());
+    String weatherInfo = "  " + city + "  Weather:" + today.text_day;
+    weatherInfo += "  High:" + String(today.temp_high) + "C" ;
+    weatherInfo += "  Low:" + String(today.temp_low) + "C";
+    weatherInfo += "  Temp:" + String(Temperature) + "C";
+    weatherInfo += "  Humidity:" + String(Humidity) + "%";
+    scrollMessage(currentDate + weatherInfo);
+  }
+  else if (second() == 0) { //当秒钟为0时，读取温湿度值，即每分钟读取一次
+    Humidity = dht.readHumidity();
+    while (isnan(Humidity) || Humidity > 100)
+      Humidity = dht.readHumidity();
+    Temperature = dht.readTemperature(); //摄氏度
+    while (isnan(Temperature) || Temperature > 100)
+      Temperature = dht.readTemperature(); //摄氏度
+    checkDisplay();//每分钟判断一次是否要关闭显示
+  }
+  else if (minute() == 0 && second() == 0) { //当分钟为0，秒钟为0时，显示整点问候，整点报时
+    scrollMessage(marqueeMessage);
+    if (ring && displayOn) //手机端如果设置整点报时，且屏幕点亮时才整点报时
+      onTimeAlarm();
+  }
+  else { //显示时间
+     Serial.println("show time");
     String currentTime = "" ;
     String colon = (second() % 2 == 0) ? ":" : " ";
     if (IS_24HOUR) {//24小时制
@@ -17,34 +45,6 @@ void Display() { //显示内容
     }
     centerPrint(currentTime);
   }
-  else if (displyType == 1) {//显示日期，天气，温湿度
-    String currentDate = String(year());
-    currentDate += (month() < 10) ? "-0" + String(month()) : "-" + String(month());
-    currentDate += (day() < 10) ? "-0" + String(day()) : "-" + String(day());
-    String weatherInfo = "  " + city + "  Weather:" + today.text_day;
-    weatherInfo += "  High:" + String(today.temp_high) + "C" ;
-    weatherInfo += "  Low:" + String(today.temp_low) + "C";
-    weatherInfo += "  Temp:" + String(Temperature) + "C";
-    weatherInfo += "  Humidity:" + String(Humidity) + "%";
-    scrollMessage(currentDate + weatherInfo);
-    displyType = 0;
-  }
-  if (second() == 0) { //当秒钟为0时，读取温湿度值，即每分钟读取一次
-    Humidity = dht.readHumidity();
-    while (isnan(Humidity) || Humidity > 100)
-      Humidity = dht.readHumidity();
-    Temperature = dht.readTemperature(); //摄氏度
-    while (isnan(Temperature) || Temperature > 100)
-      Temperature = dht.readTemperature(); //摄氏度
-    Serial.println(Humidity);
-    Serial.println(Temperature);
-    checkDisplay();//每分钟判断一次是否要关闭显示
-  }
-  if (minute() == 0 && second() == 0) { //当分钟为0，秒钟为0时，显示整点问候，整点报时
-    scrollMessage(marqueeMessage);
-    if (ring && displayOn) //手机端如果设置整点报时，且屏幕点亮时才整点报时
-      onTimeAlarm();
-  }
 }
 void onTimeAlarm ()//整点报时铃声
 {
@@ -55,10 +55,6 @@ void onTimeAlarm ()//整点报时铃声
   tone(pinBuzzer, 370, 1000);
   delay(1000 * 1.3);
   noTone(pinBuzzer);
-}
-void displaySwitch() { //中断函数，判断按键
-  Blynk.virtualWrite(V2, "https://" + host + "/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
-  displyType++;
 }
 BLYNK_CONNECTED() {
   rtc.begin();//连上后同步时间
@@ -93,14 +89,14 @@ void setup() {
   }
   Blynk.virtualWrite(V2, "https://" + host + "/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
   setSyncInterval(10 * 60); // 设置同步间隔时间，10分钟
-  attachInterrupt(digitalPinToInterrupt(pinBtn), displaySwitch, RISING);
   timer.setInterval(1000L, Display);//每隔1s，运行Display函数
-  Humidity = dht.readHumidity();
-  while (isnan(Humidity) || Humidity > 100)
-    Humidity = dht.readHumidity();
-  Temperature = dht.readTemperature();
-  while (isnan(Temperature) || Temperature > 100)
-    Temperature = dht.readTemperature();
+//  Humidity = dht.readHumidity();
+//  while (isnan(Humidity) || Humidity > 100)
+//    Humidity = dht.readHumidity();
+//  Temperature = dht.readTemperature();
+//  while (isnan(Temperature) || Temperature > 100)
+//    Temperature = dht.readTemperature();
+  Serial.println(Temperature);
 }
 void enableDisplay(boolean enable) {//开启显示
   displayOn = enable;

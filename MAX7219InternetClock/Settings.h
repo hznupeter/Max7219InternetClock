@@ -22,7 +22,6 @@ int displayScrollSpeed = 30; // 字符滚动速度
 boolean ring = false; //是否整点提醒
 BlynkTimer timer;
 String  daily_json;
-int displyType = 0;
 int Humidity, Temperature;
 struct daily_data {//气象信息结构体
   String date;//日期
@@ -42,7 +41,6 @@ boolean displayOn = true;
 // CS  -> D6 GPIO12
 // DIN -> D7 (MOSI)GPIO13
 const int pinCS = 12; //max7219 CS
-const int pinBtn = 4;//按键/触发器管脚
 const int pinBuzzer = 15;//蜂鸣器管脚
 const int pinDHT = 5; //DHT11传感器连接管脚
 int displayIntensity = 1;  //默认亮度(1 - 15)
