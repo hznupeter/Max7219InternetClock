@@ -11,7 +11,7 @@
 #include <Max72xxPanel.h>
 #include <pgmspace.h>
 #define DHTTYPE DHT22
-char auth[] = "4c77138d712c48d7a6f922cf3d7246ed";//授权码
+char auth[] = "28d8a803d36046d3ab8681476f4e59d6";//授权码
 String APIKEY = "wactucc9uyjz6lq7"; //心知天气API
 String city = "Hangzhou";
 String marqueeMessage = "Have A Good Day";
