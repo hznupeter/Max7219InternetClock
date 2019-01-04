@@ -23,6 +23,8 @@ void Display() { //显示内容
     Temperature = dht.readTemperature(); //摄氏度
     while (isnan(Temperature) || Temperature > 100)
       Temperature = dht.readTemperature(); //摄氏度
+    Blynk.virtualWrite(V10, Temperature);
+    Blynk.virtualWrite(V11, Humidity);
     long currentTime = hour() * 60 * 60 + minute() * 60 + second();
     if (currentTime == timeDisplayTurnsOn && !displayOn) {//如果当前时间等于设定的开机时间，且当前屏幕没有开，则开启显示
       enableDisplay(true);
