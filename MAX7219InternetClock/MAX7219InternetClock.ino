@@ -111,12 +111,6 @@ void setup() {
   Blynk.virtualWrite(V2, "https://api.seniverse.com/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
   setSyncInterval(10 * 60); // 设置同步间隔时间，10分钟
   timer.setInterval(1000L, Display);//每隔1s，运行Display函数
-  //  Humidity = dht.readHumidity();
-  //  while (isnan(Humidity) || Humidity > 100)
-  //    Humidity = dht.readHumidity();
-  //  Temperature = dht.readTemperature();
-  //  while (isnan(Temperature) || Temperature > 100)
-  //    Temperature = dht.readTemperature();
   Serial.println(Temperature);
 }
 void enableDisplay(boolean enable) {//开启显示
