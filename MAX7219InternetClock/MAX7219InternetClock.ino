@@ -18,10 +18,10 @@ void Display() { //显示内容
   }
   else if (second() == 0) { //当秒钟为0时，读取温湿度值，即每分钟读取一次
     Humidity = dht.readHumidity();
-    while (isnan(Humidity) || Humidity > 100)
+    if (isnan(Humidity) || Humidity > 100)
       Humidity = dht.readHumidity();
     Temperature = dht.readTemperature(); //摄氏度
-    while (isnan(Temperature) || Temperature > 100)
+    if (isnan(Temperature) || Temperature > 100)
       Temperature = dht.readTemperature(); //摄氏度
     Blynk.virtualWrite(V10, Temperature);
     Blynk.virtualWrite(V11, Humidity);
@@ -33,6 +33,7 @@ void Display() { //显示内容
       enableDisplay(false);
     }
     if (currentTime == AlarmTime) { //如果当前时间等于设定的闹钟时间
+      Serial.println(currentTime);
       AlarmClock();
     }
   }
@@ -42,11 +43,12 @@ void Display() { //显示内容
       onTimeAlarm();
   }
   else { //显示时间
-    Serial.println("show time");
+
     String currentTime = "" ;
     String colon = (second() % 2 == 0) ? ":" : " ";//时钟分割点
     if (IS_24HOUR) {//24小时制
-      currentTime += (hour() < 10) ? "0" + String(hour()) : String(hour()) + colon;
+      currentTime += (hour() < 10) ? "0" + String(hour()) : String(hour());
+      currentTime += colon;
       currentTime += (minute() < 10) ? "0" + String(minute()) :  String(minute());
     }
     else {//12小时制
@@ -55,6 +57,7 @@ void Display() { //显示内容
       currentTime += (minute() < 10) ? "0" + String(minute()) :  String(minute());
     }
     centerPrint(currentTime);
+    Serial.println(currentTime);
   }
 }
 void AlarmClock ()//闹钟铃声
@@ -78,35 +81,17 @@ void onTimeAlarm ()//整点报时铃声
   noTone(pinBuzzer);
 }
 BLYNK_CONNECTED() {
-  rtc.begin();//连上后同步时间
+  rtc.begin();//连上服务器，后同步时间
 }
 void setup() {
   Serial.begin(9600);
-  WiFi.mode(WIFI_STA);
-  int cnt = 0;
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-    if (cnt++ >= 10) {
-      WiFi.beginSmartConfig();
-      while (1) {
-        delay(1000);
-        if (WiFi.smartConfigDone()) {
-          Serial.println();
-          Serial.println("SmartConfig: Success");
-          break;
-        }
-        Serial.print("|");
-      }
-    }
-  }
-  WiFi.printDiag(Serial);
-  Blynk.config(auth, IPAddress(116, 62, 49, 166), 8080);
+  Blynk.begin(auth, ssid, pass, IPAddress(116, 62, 49, 166), 8080);
   matrix.fillScreen(LOW); //黑屏
   matrix.setIntensity(displayIntensity);//设置亮度
   for (int i = 0; i < 4; i++) {//设置显示方向
-    matrix.setRotation(i, 3);
-    matrix.setPosition(i, 3 - i, 0);
+    matrix.setRotation(i, 3);//设置点阵屏显示方向
+    // matrix.setPosition(i, 3 - i, 0);
+    matrix.setPosition(i, i, 0);//设置点阵屏位置，不同点阵屏，不同方向，可能要调整
   }
   Blynk.virtualWrite(V2, "https://api.seniverse.com/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
   setSyncInterval(10 * 60); // 设置同步间隔时间，10分钟
@@ -196,9 +181,7 @@ BLYNK_WRITE(V8)//获取滚动速度
 BLYNK_WRITE(V9)//获取闹钟时间
 {
   AlarmTime = param[0].asLong();
-}
-void checkDisplay() {//检查是否要关闭显示
-
+  Serial.println(AlarmTime);
 }
 void scrollMessage(String msg) {//滚动显示文本
   msg += "";

@@ -10,14 +10,16 @@
 #include <Adafruit_GFX.h>
 #include <Max72xxPanel.h>
 #include <pgmspace.h>
-#define DHTTYPE DHT22
-char auth[] = "28d8a803d36046d3ab8681476f4e59d6";//授权码
-String APIKEY = "wactucc9uyjz6lq7"; //心知天气API
+#define DHTTYPE DHT11
+char auth[] = "28d8a803d36046d3ab8681476******";//授权码
+String APIKEY = "wactucc9uy******"; //心知天气API
 String city = "Hangzhou";
-String marqueeMessage = "Have A Good Day";
+char ssid[] = "Maker Space";//wifi名称
+char pass[] = "20140***";//wifi密码
+String marqueeMessage = "Have A Good Day";//问候语
 boolean IS_24HOUR = true; // 24/12小时制
 int displayScrollSpeed = 30; // 字符滚动速度
-boolean ring = false; //是否整点提醒
+boolean ring = true; //是否整点提醒
 BlynkTimer timer;
 String  daily_json;
 int Humidity, Temperature;
