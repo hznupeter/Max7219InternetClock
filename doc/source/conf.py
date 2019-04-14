@@ -31,6 +31,14 @@ release = '0.999'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+'sphinx.ext.autodoc',
+'sphinx.ext.doctest',
+'sphinx.ext.intersphinx',
+'sphinx.ext.todo',
+'sphinx.ext.coverage',
+'sphinx.ext.mathjax',
+'sphinx.ext.ifconfig',
+'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,8 +55,9 @@ language = 'zh_CN'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-
-
+html_static_path = ['static']
+html_favicon = 'favicon.ico'
+html_logo = 'images/logo.png'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
