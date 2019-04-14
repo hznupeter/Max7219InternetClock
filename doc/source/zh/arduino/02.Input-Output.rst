@@ -13,7 +13,7 @@
 数字输出
 --------------
 
-.. image:: images/02/digitalWrite.jpg
+.. image:: images/02/digitalWrite.png
 
 描述
 ++++++++++++++
@@ -34,7 +34,7 @@
 +++++
 将13号端口设置为高电平，延迟一秒，然后设置为低电平，再延迟一秒，如此往复。
 
-.. image:: images/02/digitalWrite-example.jpg
+.. image:: images/02/digitalWrite-example.png
 
 注释
 +++++++++
@@ -43,7 +43,7 @@
 数字输入
 --------------
 
-.. image:: images/02/inout10.png
+.. image:: images/02/digitalRead.png
 
 描述
 ++++++++++++++
@@ -62,7 +62,7 @@ HIGH 或 LOW
 范例
 +++++
 读取数字0号引脚的值。
-.. image:: images/02/digitalRead-example.jpg
+.. image:: images/02/digitalRead-example.png
 
 注释
 +++++++++
