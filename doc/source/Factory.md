@@ -1,0 +1,2 @@
+Mixly provided extensions in order to support everyone developing their own factory libraries. 
+So far to Mixly 0.97 version, there are DFROBOT、SEEEDSTUDIO、MAKEBLOCK、MBOT robot、SENSE box、SENSE robot、LuBot、Micoduino、Nova in this part.

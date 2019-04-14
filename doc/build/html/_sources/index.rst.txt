@@ -8,7 +8,7 @@ Welcome to mixly_wiki's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Contents:abs
 
 
 
