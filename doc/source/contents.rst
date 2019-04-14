@@ -15,7 +15,7 @@ Arduino 编程
 .. toctree::
    :maxdepth: 2
 
-   zh/arduino/index.rst
+   zh/Arduino/index.rst
 
 Python 编程
 ---------
