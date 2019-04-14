@@ -11,8 +11,8 @@
 #include <Max72xxPanel.h>
 #include <pgmspace.h>
 #define DHTTYPE DHT11
-char auth[] = "28d8a803d36046d3ab8681476******";//授权码
-String APIKEY = "wactucc9uy******"; //心知天气API
+char auth[] = "28d8a803d36046d3ab8681476f4e59d6";//授权码
+String APIKEY = "wactucc9uyjz6lq7"; //心知天气API
 String city = "Hangzhou";
 char ssid[] = "Maker Space";//wifi名称
 char pass[] = "20140***";//wifi密码

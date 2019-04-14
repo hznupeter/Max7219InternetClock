@@ -5,7 +5,7 @@ void Display() { //显示内容
     scrollMessage(marqueeMessage);
   }
   else if ((minute() == 59 || minute() == 30) && second() == 0) { //显示日期，天气，温湿度，每隔半小时
-    Blynk.virtualWrite(V2, "https://api.seniverse.com/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=5");
+    Blynk.virtualWrite(V2, "https://api.seniverse.com/v3/weather/daily.json?key=" + APIKEY + "&location=" + city + "&language=en&unit=c&start=0&days=1");
     String currentDate = String(year());
     currentDate += (month() < 10) ? "-0" + String(month()) : "-" + String(month());
     currentDate += (day() < 10) ? "-0" + String(day()) : "-" + String(day());
