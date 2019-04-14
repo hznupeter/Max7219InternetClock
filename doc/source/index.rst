@@ -1,8 +1,18 @@
+Mixly 帮助文档
+======================================
+
+欢迎您，使用Mixly！
+
+
 Arduino 
+---------
 .. toctree::
    :maxdepth: 2
 
-   arduino/index.rst
+   zh/arduino/index.rst
+
+..
+
 # 目录
 
 ## [Mixly简介](zh/00.Mixly_introduction.html)
