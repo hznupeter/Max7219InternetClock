@@ -10,12 +10,12 @@ Mixly 帮助文档
 
    zh/basic/index.rst
 
-Arduino 编程
+Arduino 编程部分
 ---------
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
-   zh/Arduino/index.rst
+   zh/arduino/index.rst
 
 Python 编程
 ---------
