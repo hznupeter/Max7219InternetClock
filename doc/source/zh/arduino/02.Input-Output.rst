@@ -62,6 +62,7 @@ HIGH 或 LOW
 范例
 +++++
 读取数字0号引脚的值。
+
 .. image:: images/02/digitalRead-example.png
 
 注释
