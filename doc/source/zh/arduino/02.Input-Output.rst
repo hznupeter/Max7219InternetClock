@@ -43,7 +43,7 @@
 数字输入
 --------------
 
-.. image:: images/02/digitalRead.jpg
+.. image:: images/02/inout10.png
 
 描述
 ++++++++++++++
