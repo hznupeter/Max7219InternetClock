@@ -2,4 +2,4 @@
 *.docx
 *.tmp
 *.Z1
-/doc/build
+doc/build
