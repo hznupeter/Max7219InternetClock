@@ -3,7 +3,7 @@ Mixly 帮助文档
 
 欢迎您，使用Mixly！
 
-软件使用基础部分
+软件使用基础
 ---------
 .. toctree::
    :maxdepth: 2
