@@ -7,34 +7,38 @@
 
 ## [输入/输出](zh/02.Input-Output.html)
 
-##[控制](zh/03.control.html)
+## [控制](zh/03.control.html)
 
-##[文本](zh/05.Text.html)
+## [文本](zh/05.Text.html)
 
-##[Mixly简介](zh/00.Mixly_introduction.html)
+## [数组](zh/06.List.html)
 
-##[Mixly安装](zh/01.Installation-for-Mixly.html)
+## [逻辑](zh/07.Logic.html)
 
-##[输入/输出](zh/02.Input-Output.html)
+## [通讯](zh/08.communicate.html)
 
-##[控制](zh/03.control.html)
+## [存储](zh/09.storage.html)
 
-##[数学](zh/04.Mathematics.html)
+## [传感器](zh/10.sensor.html)
 
-- **[[文本]]**
-- **[[数组]]**
-- **[[逻辑]]**
-- **[[通信]]**
-- **[[存储]]**
-- **[[传感器]]**
-- **[[执行器]]**
-- **[[以太网]]**
-- **[[变量]]**
-- **[[函数]]**
-- **[[程序建构区]]**
-- **[[代码程序区]]**
-- **[[系统功能区]]**
-- **[[消息提示区]]**
-- **[[自定义公司库]]**
-- **[[示范案例]]**
-- **[[FAQ]]**
+## [执行器](zh/11.actuator.html)
+
+## [以太网](zh/12.ethernet.html)
+
+## [变量](zh/13.variables.html)
+
+## [函数](zh/14.functions.html)
+
+## [Factory](zh/15.factory.html)
+
+## [程序建构区](zh/20.Programming-building-area.html)
+
+## [代码程序区](zh/21.Coding-area.html)
+
+## [消息提示区](zh/22.Message-area.html)
+
+## [系统功能区](zh/23.System-function-area.html)
+
+## [示范案例](zh/24.example.html)
+
+## [FAQ](zh/25.FAQ.html)
