@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'mixly_wiki'
-copyright = '2019, hznupeter'
+project = 'Mixly WIKI'
+copyright = '2019, Mixly'
 author = 'hznupeter'
 
 # The full version, including alpha/beta/rc tags
