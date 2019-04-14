@@ -1,2 +1,2 @@
-Mixly Factory
+Factory
 ===============

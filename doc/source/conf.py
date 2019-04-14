@@ -55,9 +55,9 @@ language = 'zh_CN'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
-#html_static_path = ['static']
-html_favicon = 'images/favicon.png'
-html_logo = 'images/favicon.png'
+html_static_path = ['static']
+html_favicon = 'favicon.png'
+html_logo = 'favicon.png'
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

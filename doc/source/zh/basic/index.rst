@@ -11,5 +11,7 @@
    22.Message-area.rst
    23.System-function-area.rst
    24.Example.rst
+   26.Company.rst
+   27.Third-Party.rst
    25.FAQ.rst
 
