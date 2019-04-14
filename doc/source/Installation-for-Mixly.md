@@ -1,7 +1,7 @@
 # How to install Mixly?
 ### Decompression
 After you download the installation zip, please decompress it on your computer.
-![](https://github.com/xbed/Mixly_Arduino/blob/master/wiki_pic/install-en1.png)
+![](images/install-en1.png)
 ### Physical connection
 Connect Arduino UNO with your computer or laptop using USB.
 ### install driver
@@ -14,4 +14,4 @@ After you finish installation, you will find a new serial port.
 
 ### Start Mixly
 Double click Mixly.vbs under in the Mixly folder and you can enter the main interface of Mixly.
-![](https://github.com/xbed/Mixly_Arduino/blob/master/wiki_pic/install-en2.png)
+![](images/install-en2.png)

@@ -1,4 +1,4 @@
-![](https://github.com/xbed/Mixly_Arduino/blob/master/wiki_pic/programming%20building%20area1.png)
+![](images/programming%20building%20area1.png)
 
 We usually complete a certain function codes to connection in this area.
 The lower right area there is a trash can, students can drag useless codes to the trash, or you can drag directly to the left area(module selection area), you can also remove the code. Of course, click on the code, then click Delete, codes can also be deleted.
