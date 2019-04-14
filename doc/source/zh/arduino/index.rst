@@ -9,5 +9,14 @@ Arduino 编程
    04.Mathematics.rst
    05.Text.rst
    06.Lists.rst
+   07.Logic.rst
+   08.Communicate.rst
+   09.Storage.rst
+   10.Sensor.rst
+   11.Actuator.rst
+   12.Ethernet.rst
+   13.Variables.rst
+   14.Functions.rst
+   15.Factory.rst
 
 
