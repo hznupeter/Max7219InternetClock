@@ -1,4 +1,5 @@
-# Mixly 传感器
+Mixly 传感器
+=============
 传感模块：超声波、DHT11、DS18B20（新增）
 
 .. image:: images/10/sensor1.png
