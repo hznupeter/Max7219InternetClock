@@ -17,10 +17,10 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Mixly WIKI'
-copyright = '2019, Mixly'
+project = 'Mixly Wiki'
+copyright = '2019, Mixly Team'
 author = 'hznupeter'
-
+version='0.999'
 # The full version, including alpha/beta/rc tags
 release = '0.999'
 
@@ -50,7 +50,8 @@ templates_path = ['_templates']
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
 language = 'zh_CN'
-
+locale_dirs = ['locale/']   # path is example but recommended.
+gettext_compact = False     # optional.
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
